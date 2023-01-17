@@ -1,3 +1,3 @@
 # API &middot; ![bitrix](https://img.shields.io/badge/bitrix-module-orange)
 
-Модуль для работы API для CMS 1C-Битрикс
+РњРѕРґСѓР»СЊ РґР»СЏ СЂР°Р±РѕС‚С‹ API РґР»СЏ CMS 1C-Р‘РёС‚СЂРёРєСЃ
