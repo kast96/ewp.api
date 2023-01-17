@@ -1,4 +1,4 @@
-<?php
+<?
 use \Bitrix\Main\Routing\RoutingConfigurator;
 use \Ewp\Api\V1\Controllers\UsersController;
 use \Ewp\Api\V1\Controllers\ProductsController;
@@ -14,6 +14,10 @@ header('Access-Control-Allow-Headers: X-CSRF-Token, X-Requested-With, Accept, Ac
 
 return function (RoutingConfigurator $routes)
 {
+	$routes->any(API_PATH, function(){
+		return "Hello";
+	})->methods(['GET', 'OPTIONS']);
+
 	$routes->any(API_PATH.'/profile', [UsersController::class, 'profile'])->methods(['GET', 'OPTIONS']);
 	$routes->any(API_PATH.'/auth', [UsersController::class, 'auth'])->methods(['POST', 'OPTIONS']);
 	
