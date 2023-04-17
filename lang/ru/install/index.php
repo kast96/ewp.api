@@ -1,8 +1,8 @@
 <?
-$MESS["EWP_API_MODULE_NAME"] = "Ýêñïàíñèÿ: REST API";
-$MESS["EWP_API_MODULE_DESCRIPTION"] = "Ìîäóëü REST API";
-$MESS["EWP_API_PARTNER_NAME"] = "Ýêñïàíñèÿ";
+$MESS["EWP_API_MODULE_NAME"] = "Ð­ÐºÑÐ¿Ð°Ð½ÑÐ¸Ñ: REST API";
+$MESS["EWP_API_MODULE_DESCRIPTION"] = "ÐœÐ¾Ð´ÑƒÐ»ÑŒ REST API";
+$MESS["EWP_API_PARTNER_NAME"] = "Ð­ÐºÑÐ¿Ð°Ð½ÑÐ¸Ñ";
 $MESS["EWP_API_PARTNER_URI"] = "https://ewp.ru";
-$MESS["EWP_API_INSTALL_ERROR_VERSION"] = "Âåðñèÿ ãëàâíîãî ìîäóëÿ íèæå 21.400.00. Ïîæàëóéñòà îáíîâèòå ñèñòåìó.";
-$MESS["EWP_API_INSTALL_TITLE"] = "Óñòàíîâêà ìîäóëÿ";
-$MESS["EWP_API_UNINSTALL_TITLE"] = "Äåèíñòàëëÿöèÿ ìîäóëÿ";
+$MESS["EWP_API_INSTALL_ERROR_VERSION"] = "Ð’ÐµÑ€ÑÐ¸Ñ Ð³Ð»Ð°Ð²Ð½Ð¾Ð³Ð¾ Ð¼Ð¾Ð´ÑƒÐ»Ñ Ð½Ð¸Ð¶Ðµ 21.400.00. ÐŸÐ¾Ð¶Ð°Ð»ÑƒÐ¹ÑÑ‚Ð° Ð¾Ð±Ð½Ð¾Ð²Ð¸Ñ‚Ðµ ÑÐ¸ÑÑ‚ÐµÐ¼Ñƒ.";
+$MESS["EWP_API_INSTALL_TITLE"] = "Ð£ÑÑ‚Ð°Ð½Ð¾Ð²ÐºÐ° Ð¼Ð¾Ð´ÑƒÐ»Ñ";
+$MESS["EWP_API_UNINSTALL_TITLE"] = "Ð”ÐµÐ¸Ð½ÑÑ‚Ð°Ð»Ð»ÑÑ†Ð¸Ñ Ð¼Ð¾Ð´ÑƒÐ»Ñ";

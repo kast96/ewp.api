@@ -1,0 +1,3 @@
+<?
+$MESS["EWP_API_MENU_TURBO_ROOT"] = "EWP: API";
+$MESS["EWP_API_MENU_LIST"] = "Список API";

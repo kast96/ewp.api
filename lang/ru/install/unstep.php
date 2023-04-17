@@ -1,4 +1,4 @@
 <?
-	$MESS["EWP_API_UNSTEP_BEFORE"] = "Ìîäóëü";
-	$MESS["EWP_API_UNSTEP_AFTER"] = "óäàëåí";
-	$MESS["EWP_API_UNSTEP_SUBMIT_BACK"] = "Âåðíóòüñÿ â ñïèñîê";
+	$MESS["EWP_API_UNSTEP_BEFORE"] = "ÐœÐ¾Ð´ÑƒÐ»ÑŒ";
+	$MESS["EWP_API_UNSTEP_AFTER"] = "ÑƒÐ´Ð°Ð»ÐµÐ½";
+	$MESS["EWP_API_UNSTEP_SUBMIT_BACK"] = "Ð’ÐµÑ€Ð½ÑƒÑ‚ÑŒÑÑ Ð² ÑÐ¿Ð¸ÑÐ¾Ðº";

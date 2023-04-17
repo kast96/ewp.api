@@ -1,5 +1,5 @@
 <?
-namespace Ewp\Api\V1\ActionFilter;
+namespace Ewp\Api\ActionFilter;
 
 use \Bitrix\Main\Engine\ActionFilter\Base;
 use \Bitrix\Main\Error;

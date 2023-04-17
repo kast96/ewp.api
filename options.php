@@ -1,14 +1,14 @@
 <?
-use Bitrix\Main\Application;
-use Bitrix\Main\Localization\Loc;
-use Bitrix\Main\Loader;
-use Ewp\Api\Main;
-use Bitrix\Main\Config\Option;
+use \Bitrix\Main\Application;
+use \Bitrix\Main\Localization\Loc;
+use \Bitrix\Main\Loader;
+use \Bitrix\Main\Config\Option;
+use \Ewp\Api\Main;
 
 Loc::loadMessages(Application::getDocumentRoot().BX_ROOT.'/modules/main/options.php');
 Loc::loadMessages(__FILE__);
 
-$module_id = Main::getModuleId();
+$module_id = 'ewp.api';
 
 Loader::includeModule($module_id);
 Loader::includeModule('iblock');
@@ -18,59 +18,69 @@ $context = $app->getContext();
 $request = $context->getRequest();
 
 $moduleRight = $APPLICATION->GetGroupRight($module_id);
-if($moduleRight <= 'D') $APPLICATION->AuthForm(Loc::getMessage('ACCESS_DENIED'));
+if($moduleRight <= 'D') $APPLICATION->AuthForm(Loc::getMessage('EWP_API_OPTIONS_ACCESS_DENIED'));
 
 $moduleRightR = $moduleRight >= 'R';
 $moduleRightW = $moduleRight >= 'W';
 
 if (!$moduleRightR && !$moduleRightW) return;
 
-$aTabs = array(
-	array(
-		'DIV' => $module_id.'_rights',
-		'TAB' => Loc::getMessage('TAB_RIGHTS_TITLE'),
+$aTabs = [
+	[
+		'DIV' => $module_id.'_common',
+		'TAB' => Loc::getMessage('EWP_API_OPTIONS_TAB_COMMON_TITLE'),
 		'ICON' => 'main_settings',
-		'TITLE' => Loc::getMessage('TAB_RIGHTS_TITLE_COMMON')
+		'TITLE' => Loc::getMessage('EWP_API_OPTIONS_TAB_COMMON_TITLE')
+	],
+	[
+		'DIV' => $module_id.'_rights',
+		'TAB' => Loc::getMessage('EWP_API_OPTIONS_TAB_RIGHTS_TITLE'),
+		'ICON' => 'main_settings',
+		'TITLE' => Loc::getMessage('EWP_API_OPTIONS_TAB_RIGHTS_TITLE_COMMON')
+	],
+];
+
+$arCommonOptions = [
+	'API_PATH' => array(
+		'ID' => 'API_PATH',
+		'NAME' => Loc::getMessage('EWP_API_OPTIONS_API_PATH'),
+		'TYPE' => 'text',
 	),
-);
+];
 
 function showOption($arOption)
 {
 	$val = (Option::get(Main::getModuleId(), $arOption['ID']));
 	?>
-	<div class="option">
-		<h4 class="option-title">
-			<label for="<?=htmlspecialcharsbx($arOption['ID'])?>"><?=$arOption['NAME']?></label>
-		</h4>
-		<div class="option-input-container">
-			<?
-				switch ($arOption['TYPE']) {
-					case 'checkbox':
-						?><input class="<?=$arOption['CLASS']?>" type="checkbox" name="<?=htmlspecialcharsbx($arOption['ID'])?>" id="<?=htmlspecialcharsbx($arOption['ID'])?>" value="Y"<?=($val=="Y") ? ' checked' : ''?>><?
-						break;
-					
-					case 'text':
-						?><input class="<?=$arOption['CLASS']?>" type="text" maxlength="255" name="<?=htmlspecialcharsbx($arOption['ID'])?>" id="<?=htmlspecialcharsbx($arOption['ID'])?>" value="<?=htmlspecialcharsbx($val)?>"><?
-						break;
-					
-					case 'textarea':
-						?><textarea class="<?=$arOption['CLASS']?>" rows="<?=$arOption['ROWS']?>" cols="<?=$arOption['COLS']?>" name="<?=htmlspecialcharsbx($arOption["ID"])?>" id="<?=htmlspecialcharsbx($arOption['ID'])?>"><?=htmlspecialcharsbx($val)?></textarea><?
-						break;
+	<td width="40%"><?=$arOption['NAME']?>:</td>
+	<td width="60%">
+		<?
+			switch ($arOption['TYPE']) {
+				case 'checkbox':
+					?><input class="<?=$arOption['CLASS']?>" type="checkbox" name="<?=htmlspecialcharsbx($arOption['ID'])?>" id="<?=htmlspecialcharsbx($arOption['ID'])?>" value="Y"<?=($val=="Y") ? ' checked' : ''?>><?
+					break;
+				
+				case 'text':
+					?><input class="<?=$arOption['CLASS']?>" type="text" size="35" maxlength="255" name="<?=htmlspecialcharsbx($arOption['ID'])?>" id="<?=htmlspecialcharsbx($arOption['ID'])?>" value="<?=htmlspecialcharsbx($val)?>"><?
+					break;
+				
+				case 'textarea':
+					?><textarea class="<?=$arOption['CLASS']?>" rows="<?=$arOption['ROWS']?>" cols="<?=$arOption['COLS']?>" name="<?=htmlspecialcharsbx($arOption["ID"])?>" id="<?=htmlspecialcharsbx($arOption['ID'])?>"><?=htmlspecialcharsbx($val)?></textarea><?
+					break;
 
-					case 'selectbox':
-						?><select class="<?=$arOption['CLASS']?>" name="<?=htmlspecialcharsbx($arOption['ID'])?>">
-						<?foreach ($arOption['VALUES'] as $key => $value):?>
-							<option value="<?=$key?>"<?=($val==$key) ? ' selected' : ''?>><?=htmlspecialcharsbx($value)?></option>
-						<?endforeach?>
-						</select><?
-						break;
-					
-					default:
-						break;
-				}
+				case 'selectbox':
+					?><select class="<?=$arOption['CLASS']?>" name="<?=htmlspecialcharsbx($arOption['ID'])?>">
+					<?foreach ($arOption['VALUES'] as $key => $value):?>
+						<option value="<?=$key?>"<?=($val==$key) ? ' selected' : ''?>><?=htmlspecialcharsbx($value)?></option>
+					<?endforeach?>
+					</select><?
+					break;
+				
+				default:
+					break;
+			}
 		?>
-		</div>
-	</div>
+	</td>
 	<?
 }
 
@@ -122,12 +132,22 @@ if ($REQUEST_METHOD == "POST" && strlen($Update.$Apply.$RestoreDefaults.$save) >
 	<?
 	$tabControl->Begin();
 	$tabControl->BeginNextTab();
+		?>
+		<tr>
+			<?
+			foreach ($arCommonOptions as $arOption) {
+				showOption($arOption);
+			}
+			?>
+		</tr>
+		<?
+	$tabControl->BeginNextTab();
 	?>
 		<?require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/admin/group_rights.php")?>
 
 	<?$tabControl->Buttons()?>
-		<input <?=(!$moduleRightW) ? 'disabled' : ''?> type="submit" name="Update" value="<?=Loc::getMessage("OPTIONS_SAVE")?>" title="<?=Loc::getMessage("OPTIONS_SAVE")?>" class="adm-btn-save">
-		<input <?=(!$moduleRightW) ? 'disabled' : ''?> type="submit" name="RestoreDefaults" title="<?=Loc::getMessage("OPTIONS_RESTORE")?>" onclick="return confirm('<?=AddSlashes(Loc::getMessage("MAIN_HINT_RESTORE_DEFAULTS_WARNING"))?>')" value="<?=Loc::getMessage("OPTIONS_RESTORE")?>">
+		<input <?=(!$moduleRightW) ? 'disabled' : ''?> type="submit" name="Update" value="<?=Loc::getMessage("EWP_API_OPTIONS_OPTIONS_SAVE")?>" title="<?=Loc::getMessage("EWP_API_OPTIONS_OPTIONS_SAVE")?>" class="adm-btn-save">
+		<input <?=(!$moduleRightW) ? 'disabled' : ''?> type="submit" name="RestoreDefaults" title="<?=Loc::getMessage("EWP_API_OPTIONS_OPTIONS_RESTORE")?>" onclick="return confirm('<?=AddSlashes(Loc::getMessage("EWP_API_OPTIONS_MAIN_HINT_RESTORE_DEFAULTS_WARNING"))?>')" value="<?=Loc::getMessage("EWP_API_OPTIONS_OPTIONS_RESTORE")?>">
 		<?=bitrix_sessid_post()?>
 	<?$tabControl->End()?>
 </form>

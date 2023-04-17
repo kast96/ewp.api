@@ -1,12 +1,11 @@
 <?
-namespace Ewp\Api\V1\Controllers;
+namespace Ewp\Api\Controller;
 
 use \Bitrix\Main\Error;
 use \Bitrix\Main\Context;
-use \Bitrix\Main\Engine\CurrentUser;
 use \Bitrix\Main\UserTable;
 use \Bitrix\Main\Localization\Loc;
-use \Ewp\Api\V1\ActionFilter\AuthenticationToken;
+use \Ewp\Api\ActionFilter\AuthenticationToken;
 use \Ewp\Api\Token\JWT;
 
 class UsersController extends BaseController
@@ -25,7 +24,7 @@ class UsersController extends BaseController
 		];
 	}
 
-	public function authAction() :? array
+	public function authAction($arParams = [])
 	{
 		$request = Context::getCurrent()->getRequest();
 		$login = $request->get('login');
@@ -50,7 +49,7 @@ class UsersController extends BaseController
 		}
 	}
 
-	public function profileAction() :? array
+	public function profileAction($arParams = [])
 	{
 		$payload = JWT::getPayload();
 		

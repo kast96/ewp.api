@@ -1,5 +1,7 @@
 <?
-$MESS["TAB_RIGHTS_TITLE"] = "Äîñòóï";
-$MESS["TAB_RIGHTS_TITLE_COMMON"] = "Óðîâåíü äîñòóïà ê ìîäóëþ";
-$MESS["OPTIONS_SAVE"] = "Ñîõðàíèòü íàñòðîéêè";
-$MESS["OPTIONS_RESTORE"] = "Ñáðîñèòü íàñòðîéêè";
+$MESS["EWP_API_OPTIONS_TAB_COMMON_TITLE"] = "ÐžÑÐ½Ð¾Ð²Ð½Ñ‹Ðµ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸";
+$MESS["EWP_API_OPTIONS_TAB_RIGHTS_TITLE"] = "Ð”Ð¾ÑÑ‚ÑƒÐ¿";
+$MESS["EWP_API_OPTIONS_TAB_RIGHTS_TITLE_COMMON"] = "Ð£Ñ€Ð¾Ð²ÐµÐ½ÑŒ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð° Ðº Ð¼Ð¾Ð´ÑƒÐ»ÑŽ";
+$MESS["EWP_API_OPTIONS_OPTIONS_SAVE"] = "Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸";
+$MESS["EWP_API_OPTIONS_OPTIONS_RESTORE"] = "Ð¡Ð±Ñ€Ð¾ÑÐ¸Ñ‚ÑŒ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸";
+$MESS["EWP_API_OPTIONS_API_PATH"] = "ÐšÐ¾Ñ€Ð½ÐµÐ²Ð¾Ð¹ Ð¿ÑƒÑ‚ÑŒ Ðº API";

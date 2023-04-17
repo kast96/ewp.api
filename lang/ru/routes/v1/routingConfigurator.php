@@ -1,9 +1,9 @@
 <?
-$MESS["ERROR_USER_NOT_FOUND"] = "Ïîëüçîâàòåëü íå íàéäåí";
-$MESS["ERROR_TOKEN_NOT_FOUND"] = "Íå ïåðåäàí òîêåí àâòîðèçàöèè";
-$MESS["ERROR_NOT_FOUND_SECRET_KEY"] = "Íå íàéäåí ñåêðåòíûé êëþ÷ äëÿ òîêåíà àâòîðèçàöèè";
-$MESS["ERROR_INVALID_TOKEN"] = "Íåâåðíûé òîêåí àâòîðèçàöèè";
-$MESS["ERROR_ITEM_NOT_FOUND"] = "Ýëåìåíò íå íàéäåí";
-$MESS["ERROR_ITEMS_NOT_FOUND"] = "Ýëåìåíòû íå íàéäåíû";
-$MESS["ERROR_INCORRECT_IBLOCK_CODE"] = "Íåâåðíûé êîä èíôîáëîêà";
-$MESS["ERROR_BAD_PAGE_VALUE"] = "Íåâåðíûé íîìåð ñòðàíèöû";
+$MESS["ERROR_USER_NOT_FOUND"] = "ÐŸÐ¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½";
+$MESS["ERROR_TOKEN_NOT_FOUND"] = "ÐÐµ Ð¿ÐµÑ€ÐµÐ´Ð°Ð½ Ñ‚Ð¾ÐºÐµÐ½ Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ð¸";
+$MESS["ERROR_NOT_FOUND_SECRET_KEY"] = "ÐÐµ Ð½Ð°Ð¹Ð´ÐµÐ½ ÑÐµÐºÑ€ÐµÑ‚Ð½Ñ‹Ð¹ ÐºÐ»ÑŽÑ‡ Ð´Ð»Ñ Ñ‚Ð¾ÐºÐµÐ½Ð° Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ð¸";
+$MESS["ERROR_INVALID_TOKEN"] = "ÐÐµÐ²ÐµÑ€Ð½Ñ‹Ð¹ Ñ‚Ð¾ÐºÐµÐ½ Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ð¸";
+$MESS["ERROR_ITEM_NOT_FOUND"] = "Ð­Ð»ÐµÐ¼ÐµÐ½Ñ‚ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½";
+$MESS["ERROR_ITEMS_NOT_FOUND"] = "Ð­Ð»ÐµÐ¼ÐµÐ½Ñ‚Ñ‹ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ñ‹";
+$MESS["ERROR_INCORRECT_IBLOCK_CODE"] = "ÐÐµÐ²ÐµÑ€Ð½Ñ‹Ð¹ ÐºÐ¾Ð´ Ð¸Ð½Ñ„Ð¾Ð±Ð»Ð¾ÐºÐ°";
+$MESS["ERROR_BAD_PAGE_VALUE"] = "ÐÐµÐ²ÐµÑ€Ð½Ñ‹Ð¹ Ð½Ð¾Ð¼ÐµÑ€ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹";
