@@ -36,6 +36,7 @@ class RouteTable extends Entity\DataManager
 			]),
 			'METHOD' => new Entity\TextField('METHOD', [
 				'title' => Loc::getMessage('TABLE_METHOD'),
+				'multiple' => true,
 			]),
 			'CONTROLLER' => new Entity\TextField('CONTROLLER', [
 				'title' => Loc::getMessage('TABLE_CONTROLLER'),

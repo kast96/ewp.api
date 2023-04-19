@@ -50,7 +50,6 @@ else
 					'METHOD',
 					'CONTROLLER',
 					'CONTROLLER_METHOD',
-					'PARAMS',
 				],
 				'DEFAULT_LIST_FIELDS' => [
 					'ID',
@@ -60,7 +59,6 @@ else
 					'METHOD',
 					'CONTROLLER',
 					'CONTROLLER_METHOD',
-					'PARAMS',
 				],
 				'DEFAULT_FILTER_FIELDS' => [
 					'ID',
@@ -69,9 +67,19 @@ else
 					'ACTIVE',
 				],
 				'VIEW_LIST_FIELDS' => [
-					'PATH' => Option::get(Main::getModuleId(), 'API_PATH').'#PATH#',
+					'PATH' => function($arItem)
+						{
+							return Option::get(Main::getModuleId(), 'API_PATH').$arItem['PATH'];
+						},
+					'METHOD' => function($arItem)
+						{
+							return implode('/', unserialize($arItem['METHOD']));
+						},
 				],
 				'LIST_FIELDS_EDIT_DISABLED' => [
+					'METHOD',
+					'CONTROLLER',
+					'CONTROLLER_METHOD',
 				],
 				'MENU' => [
 					'EDIT' => [
