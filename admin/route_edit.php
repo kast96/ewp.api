@@ -170,7 +170,7 @@ else
 				}
 				else
 				{
-					LocalRedirect('/bitrix/admin/ewp_api_list.php?API_ID='.$arApi['ID'].'&lang='.LANG);
+					LocalRedirect('/bitrix/admin/ewp_api_route_list.php?API_ID='.$arApi['ID'].'&lang='.LANG);
 				}
 			}
 			else
@@ -222,7 +222,7 @@ else
 			<tr>
 				<?$value = $request->getPost('PATH') ?: $arValues['PATH']?>
 				<td width="40%"><?=Loc::getMessage('EWP_API_ROUTE_EDIT_PATH')?>:</td>
-				<td width="60%"><b><?=Option::get(Main::getModuleId(), 'API_PATH')?><?=$arApi['PATH']?></b>&nbsp;<input type="text" name="PATH" value="<?=$value?>"></td>
+				<td width="60%"><b><?=Option::get(Main::getModuleId(), 'API_PATH')?>/<?=$arApi['PATH']?>/</b>&nbsp;<input type="text" name="PATH" value="<?=$value?>"></td>
 			</tr>
 			<tr>
 				<?$value = $request->getPost('METHOD') ?: unserialize($arValues['METHOD'])?>

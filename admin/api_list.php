@@ -20,7 +20,7 @@ if (!Loader::includeSharewareModule('ewp.api'))
 }
 else
 {
-	$APPLICATION->SetTitle('Список API');
+	$APPLICATION->SetTitle(Loc::getMessage('EWP_API_API_LIST_TITLE'));
 
 	$APPLICATION->IncludeComponent(
 		'ewp:api.admin.grid.list',
@@ -46,7 +46,7 @@ else
 				'ACTIVE',
 			],
 			'VIEW_LIST_FIELDS' => [
-				'PATH' => Option::get(Main::getModuleId(), 'API_PATH').'#PATH#',
+				'PATH' => Option::get(Main::getModuleId(), 'API_PATH').'/#PATH#',
 			],
 			'LIST_FIELDS_EDIT_DISABLED' => [
 			],

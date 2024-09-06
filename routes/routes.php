@@ -1,13 +1,11 @@
 <?
 use \Bitrix\Main\Loader;
-use \Bitrix\Main\Localization\Loc;
 use \Bitrix\Main\Config\Option;
 use \Bitrix\Main\Routing\RoutingConfigurator;
 use \Ewp\Api\Main;
 use \Ewp\Api\Tables\ApiTable;
 use \Ewp\Api\Tables\RouteTable;
 
-Loc::loadMessages(__FILE__);
 Loader::includeSharewareModule('ewp.api');
 
 $apiPath = Option::get(Main::getModuleId(), 'API_PATH');
@@ -41,23 +39,26 @@ return function (RoutingConfigurator $routes)
 	}
 
 	//Роуты
-	$routes->any(API_PATH.'/', function(){
+	$routes->any(API_PATH, function(){
 		return "EWP API Running";
 	})->methods(['GET', 'OPTIONS']);
 
 	foreach ($arApies as $arApi)
 	{
-		$apiPath = API_PATH.$arApi['PATH'];
+		$apiPath = API_PATH.'/'.$arApi['PATH'];
 
     if ($arApi['ROUTES'])
     {
       foreach ($arApi['ROUTES'] as $arRoute)
       {
-				$routes->any($apiPath.$arRoute['PATH'], function() use ($arRoute) {
-					$controller = new $arRoute['CONTROLLER'];
-					$action = $arRoute['CONTROLLER_METHOD'].'Action';
-					return $controller->$action($arRoute['PARAMS']);
-				})->methods(['GET', 'OPTIONS']);
+				$route = $routes->any($apiPath.'/'.$arRoute['PATH'], [(new $arRoute['CONTROLLER'])::class, $arRoute['CONTROLLER_METHOD']])->methods($arRoute['METHOD']);
+				if (is_array($arRoute['PARAMS']))
+				{
+					foreach ($arRoute['PARAMS'] as $key => $value)
+					{
+						$route->default($key, $value);
+					}
+				}
       }
     }
 	}

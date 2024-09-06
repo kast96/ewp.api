@@ -40,6 +40,9 @@ Class ewp_api extends CModule
 		global $APPLICATION;
 		if (CheckVersion(ModuleManager::getVersion("main"), "21.400.00"))
 		{
+			\Ewp\Api\Install::SetRouteConfiguration();
+			\Ewp\Api\Install::AddUfUserToken();
+
 			$this->InstallFiles();
 			ModuleManager::registerModule($this->MODULE_ID);
 			$this->InstallDB();
@@ -55,13 +58,8 @@ Class ewp_api extends CModule
 
 	public function DoUninstall()
 	{
-		include(__DIR__."/functions.php");
-
 		global $APPLICATION;
 		$this->UnInstallFiles();
-
-		CEwpInstall::SetRouteConfiguration();
-		CEwpInstall::AddUfUserToken();
 
 		$this->UnInstallDB();
 		$this->UnInstallEvents();
@@ -106,7 +104,8 @@ Class ewp_api extends CModule
 			}
 			$d->close();
 
-			if ($rmToDir && count(scandir($toDir)) == 2) {
+			$filesTo = scandir($toDir);
+			if ($rmToDir && $filesTo && count($filesTo) == 2) {
 				Directory::deleteDirectory($toDir);
 			}
 		}

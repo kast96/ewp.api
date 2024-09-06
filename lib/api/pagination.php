@@ -6,6 +6,8 @@ use \Bitrix\Main\Error;
 use \Bitrix\Main\Context;
 use \Bitrix\Main\Localization\Loc;
 
+Loc::loadMessages(__DIR__);
+
 class Pagination
 {
 	protected $page = 1;
@@ -33,7 +35,7 @@ class Pagination
 		if ($page <= 0)
 		{
 			Context::getCurrent()->getResponse()->setStatus(400);
-			$this->arErrors[] = new Error(Loc::getMessage("ERROR_BAD_PAGE_VALUE"));
+			$this->arErrors[] = new Error(Loc::getMessage("EWP_API_PAGINATION_ERROR_BAD_PAGE_VALUEs"));
 			return false;
 		}
 
@@ -86,7 +88,7 @@ class Pagination
 		if ($this->getOffset() >= $count)
 		{
 			Context::getCurrent()->getResponse()->setStatus(204);
-			$this->arErrors[] = new Error(Loc::getMessage("ERROR_ITEMS_NOT_FOUND"));
+			$this->arErrors[] = new Error(Loc::getMessage("EWP_API_PAGINATION_ERROR_ITEMS_NOT_FOUND"));
 		}
 
 		if ($count < 0) $count = 0;

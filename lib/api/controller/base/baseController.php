@@ -9,15 +9,16 @@ use \Bitrix\Main\Error;
 use \Bitrix\Main\Context;
 use \Bitrix\Main\Loader;
 use \Bitrix\Main\Localization\Loc;
+use \Bitrix\Main\Engine\Action;
 use \Ewp\Api\Pagination;
 
-Loader::includeModule('iblock');
+Loc::loadMessages(__DIR__);
 
 class BaseController extends Controller
 {
-  protected function processBeforeAction(\Bitrix\Main\Engine\Action $action)
+  /*
+  protected function processBeforeAction(Action $action)
   {
-    /*
     $server = Context::getCurrent()->getServer();
     if($server->getRequestMethod() == 'OPTIONS') {
       Context::getCurrent()->getResponse()->setStatus(204);
@@ -25,11 +26,13 @@ class BaseController extends Controller
     }
     
     return true;
-    */
   }
+  */
 
 	protected function getIblockList($arParams = ['select' => ['ID', 'NAME']])
 	{
+    Loader::includeModule('iblock');
+
     $arIblocks = [];
 		$rsIblocks = IblockTable::getList($arParams);
     while ($arIblock = $rsIblocks->fetch())
@@ -41,6 +44,8 @@ class BaseController extends Controller
 
 	protected function getIblockByCode($code)
 	{
+    Loader::includeModule('iblock');
+
 		return IblockTable::getList([
       'select' => ['ID'],
       'filter' => ['CODE' => $code]
@@ -57,8 +62,10 @@ class BaseController extends Controller
 		return Application::getInstance()->getCurrentRoute()->getParameterValue($param);
 	}
 
-  protected function _listAction($params = array(), $pagination = array())
+  protected function _getListAction($params = array(), $pagination = array())
   {
+    Loader::includeModule('iblock');
+
     $nav = new Pagination($pagination['pageParameterName'], $pagination['limit']);
 
     if($arErrors = $nav->getErrors()) return $this->addErrors($arErrors);
@@ -92,11 +99,14 @@ class BaseController extends Controller
 		);
   }
 
-  protected function _idAction($id, $params = array())
+  protected function _getByIdAction($id, $params = array())
   {
-    if(!$arElement = ElementTable::getByPrimary($id, $params)->fetch()) {
+    Loader::includeModule('iblock');
+
+    if(!$arElement = ElementTable::getByPrimary($id, $params)->fetch())
+    {
       Context::getCurrent()->getResponse()->setStatus(400);
-      $this->addError(new Error(Loc::getMessage("ERROR_ITEM_NOT_FOUND")));
+      $this->addError(new Error(Loc::getMessage("EWP_API_BASE_CONTROLLER_ERROR_ITEM_NOT_FOUND")));
       return null;
     }
 
@@ -124,5 +134,30 @@ class BaseController extends Controller
   public function getParams()
   {
     return [];
+  }
+
+  protected function _getRouteParams()
+  {
+    $arResult = [];
+
+    $arParams = $this->getParams();
+    if (!is_array($arParams))
+    {
+      $arParams = [];
+    }
+
+    $backtrace = debug_backtrace();
+    $method = preg_replace('/Action$/', '', $backtrace[1]['function']);
+
+    $arNames = is_array($arParams[$method]) ? array_keys($arParams[$method]) : [];
+    
+    $route = Application::getInstance()->getCurrentRoute();
+    foreach ($arNames as $name)
+    {
+      $value = $route->getParameterValue($name);
+      $arResult[$name] = $value;
+    }
+
+    return $arResult;
   }
 }

@@ -35,7 +35,7 @@ else
 	}
 	else
 	{
-		$APPLICATION->SetTitle($arApi['NAME'].': Список роутов');
+		$APPLICATION->SetTitle($arApi['NAME'].': '.Loc::getMessage('EWP_API_ROUTE_LIST_TITLE'));
 
 		$APPLICATION->IncludeComponent(
 			'ewp:api.admin.grid.list',
@@ -69,7 +69,8 @@ else
 				'VIEW_LIST_FIELDS' => [
 					'PATH' => function($arItem)
 						{
-							return Option::get(Main::getModuleId(), 'API_PATH').$arItem['PATH'];
+							$arApi = ApiTable::getById($arItem['API_ID'])->fetch();
+							return Option::get(Main::getModuleId(), 'API_PATH').'/'.$arApi['PATH'].'/'.$arItem['PATH'];
 						},
 					'METHOD' => function($arItem)
 						{

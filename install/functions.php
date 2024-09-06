@@ -1,8 +1,10 @@
 <?
-use \Bitrix\Main\Config\Configuration;
-use Bitrix\Main\UserFieldTable;
+namespace Ewp\Api;
 
-class CEwpInstall
+use \Bitrix\Main\Config\Configuration;
+use \Bitrix\Main\UserFieldTable;
+
+class Install
 {
 	public static function SetRouteConfiguration()
 	{
@@ -30,19 +32,11 @@ class CEwpInstall
 	public static function AddUfUserToken()
 	{
 		if (UserFieldTable::getList(['filter' => ['ENTITY_ID' => 'USER', 'FIELD_NAME' => 'UF_EWP_API_SECRET_KEY']])->fetch())
+		{
 			return true;
+		}
 		
-		/*
-		temp old core, wait d7 adding method
-
-		UserFieldTable::add([
-			'ENTITY_ID' => 'USER',
-			'FIELD_NAME' => 'UF_EWP_API_SECRET_KEY',
-			'USER_TYPE_ID' => 'string',
-		]);
-		*/
-
-		$ob = new CUserTypeEntity();
+		$ob = new \CUserTypeEntity();
 		$ob->Add([
 			'ENTITY_ID' => 'USER',
 			'FIELD_NAME' => 'UF_EWP_API_SECRET_KEY',

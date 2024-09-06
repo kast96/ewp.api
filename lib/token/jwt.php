@@ -1,9 +1,6 @@
 <?
 namespace Ewp\Api\Token;
 
-use \Bitrix\Main\SystemException;
-use \Bitrix\Main\Localization\Loc;
-
 class JWT extends \Ewp\Api\Token\Base
 {
 	public static function getToken($userId)
@@ -15,7 +12,10 @@ class JWT extends \Ewp\Api\Token\Base
 
 	public static function checkToken()
 	{
-		$arToken = self::decodeTokenFromHeaders();
+		if (!$arToken = self::decodeTokenFromHeaders())
+		{
+			return false;
+		}
 
 		$data = parent::getTokenData($arToken['payload']['userId']);
 		$secretKey = $data['secretKey'];
@@ -27,24 +27,39 @@ class JWT extends \Ewp\Api\Token\Base
 	public static function decodeTokenFromHeaders()
 	{
 		if (!$token = self::getTokenFromHeaders())
-			throw new SystemException(Loc::getMessage("ERROR_TOKEN_NOT_FOUND"));
+		{
+			return false;
+		}
 
 		return self::decode($token);
 	}
 
 	public static function getHeader()
 	{
-		return self::decodeTokenFromHeaders()['header'];
+		if (!$arToken = self::decodeTokenFromHeaders())
+		{
+			return false;
+		}
+		return $arToken['header'];
 	}
 
 	public static function getPayload()
 	{
-		return self::decodeTokenFromHeaders()['payload'];
+		if (!$arToken = self::decodeTokenFromHeaders())
+		{
+			return false;
+		}
+
+		return $arToken['payload'];
 	}
 
 	public static function getSignature()
 	{
-		return self::decodeTokenFromHeaders()['signature'];
+		if (!$arToken = self::decodeTokenFromHeaders())
+		{
+			return false;
+		}
+		return $arToken['signature'];
 	}
 
 	public static function hashSignature($alg, $data, $secretKey)
@@ -55,7 +70,9 @@ class JWT extends \Ewp\Api\Token\Base
 	public static function encode($payload, $secretKey, $alg = 'sha256')
 	{
 		if (!$secretKey)
-			throw new SystemException(Loc::getMessage("ERROR_NOT_FOUND_SECRET_KEY"));
+		{
+			return false;
+		}
 
 		$header = base64_encode(json_encode(['alg' => $alg]));
 		$payload = base64_encode(json_encode($payload));

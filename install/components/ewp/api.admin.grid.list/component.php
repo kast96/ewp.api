@@ -284,6 +284,25 @@ while($arRes = $rsItems->NavNext(true))
 
 	foreach ($arTableFields as $key => $arField)
 	{
+		if ($arParams['VIEW_LIST_FIELDS'][$arField['ID']])
+		{
+			if (is_callable($arParams['VIEW_LIST_FIELDS'][$arField['ID']]))
+			{
+				$txt = $arParams['VIEW_LIST_FIELDS'][$arField['ID']]($arRes);
+			}
+			else
+			{
+				$txt = $arParams['VIEW_LIST_FIELDS'][$arField['ID']];
+			}
+
+			$arFieldKeys = array_keys($arRes);
+			$arFieldKeysMasks = array_map(function($item){
+				return '#'.$item.'#';
+			}, $arFieldKeys);
+			$txt = str_replace($arFieldKeysMasks, $arRes, $txt);
+			$row->AddViewField($arField['ID'], $txt);
+		}
+
 		if ($arField['ID'] == 'ID' || in_array($arField['ID'], $arParams['LIST_FIELDS_EDIT_DISABLED']))
 			continue;
 
@@ -294,15 +313,6 @@ while($arRes = $rsItems->NavNext(true))
 		else
 		{
 			$row->AddInputField($arField['ID'], ['size' => 20]);
-			if ($arParams['VIEW_LIST_FIELDS'][$arField['ID']])
-			{
-				$arFieldKeys = array_keys($arRes);
-				$arFieldKeysMasks = array_map(function($item){
-					return '#'.$item.'#';
-				}, $arFieldKeys);
-				$txt = str_replace($arFieldKeysMasks, $arRes, $arParams['VIEW_LIST_FIELDS'][$arField['ID']]);
-				$row->AddViewField($arField['ID'], $txt);
-			}
 		}
 	}
 

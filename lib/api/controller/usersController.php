@@ -8,6 +8,8 @@ use \Bitrix\Main\Localization\Loc;
 use \Ewp\Api\ActionFilter\AuthenticationToken;
 use \Ewp\Api\Token\JWT;
 
+Loc::loadMessages(__DIR__);
+
 class UsersController extends BaseController
 {
 	public function configureActions(): array
@@ -24,8 +26,10 @@ class UsersController extends BaseController
 		];
 	}
 
-	public function authAction($arParams = [])
+	public function authAction()
 	{
+		$arParams = $this->_getRouteParams();
+
 		$request = Context::getCurrent()->getRequest();
 		$login = $request->get('login');
 		$password = $request->get('password');
@@ -49,8 +53,10 @@ class UsersController extends BaseController
 		}
 	}
 
-	public function profileAction($arParams = [])
+	public function profileAction()
 	{
+		$arParams = $this->_getRouteParams();
+		
 		$payload = JWT::getPayload();
 		
 		$arUser = UserTable::getList([
@@ -60,7 +66,7 @@ class UsersController extends BaseController
 
 		if (!$arUser)
 		{
-			$this->addError(new Error(Loc::getMessage("ERROR_USER_NOT_FOUND")));
+			$this->addError(new Error(Loc::getMessage("EWP_API_USER_CONTROLLER_ERROR_USER_NOT_FOUND")));
 			return null;
 		}
 

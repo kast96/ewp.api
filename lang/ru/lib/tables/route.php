@@ -1,7 +1,7 @@
 <?
 $MESS["TABLE_ID"] = "ID";
 $MESS["TABLE_NAME"] = "Название";
-$MESS["TABLE_PATH"] = "Путь к роуту";
+$MESS["TABLE_PATH"] = "Путь к маршруту";
 $MESS["TABLE_ACTIVE"] = "Активность";
 $MESS["TABLE_API_ID"] = "API";
 $MESS["TABLE_METHOD"] = "Метод";

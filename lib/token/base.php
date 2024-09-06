@@ -3,8 +3,6 @@ namespace Ewp\Api\Token;
 
 use \Bitrix\Main\Context;
 use \Bitrix\Main\UserTable;
-use \Bitrix\Main\SystemException;
-use \Bitrix\Main\Localization\Loc;
 
 class Base
 {
@@ -21,7 +19,10 @@ class Base
 			'filter' => ['ID' => $userId],
 		])->fetch();
 
-		if (!$arUser) throw new SystemException(Loc::getMessage("ERROR_USER_NOT_FOUND"));
+		if (!$arUser)
+		{
+			return false;
+		}
 
 		//secret key
 		if (!$secretKey = $arUser['UF_EWP_API_SECRET_KEY'])

@@ -53,7 +53,7 @@ else
 		}
 		else
 		{
-			$ID = $routeTable->add($arFields)->getid();
+			$ID = $apiTable->add($arFields)->getid();
 			$result = $ID > 0;
 		}
 
@@ -117,7 +117,7 @@ else
 		<tr>
 			<?$value = $request->getPost('PATH') ?: $arValues['PATH']?>
 			<td width="40%"><?=Loc::getMessage('EWP_API_API_EDIT_PATH')?>:</td>
-			<td width="60%"><b><?=Option::get(Main::getModuleId(), 'API_PATH')?></b>&nbsp;<input type="text" name="PATH" value="<?=$value?>" placeholder="/v1"></td>
+			<td width="60%"><b><?=Option::get(Main::getModuleId(), 'API_PATH')?>/</b>&nbsp;<input type="text" name="PATH" value="<?=$value?>" placeholder="v1"></td>
 		</tr>
 
 		<?$tabControl->Buttons([
