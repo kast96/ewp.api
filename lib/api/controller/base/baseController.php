@@ -3,7 +3,7 @@ namespace Ewp\Api\Controller;
 
 use \Bitrix\Iblock\ElementTable;
 use \Bitrix\Iblock\IblockTable;
-use \Bitrix\Main\Engine\Controller;
+use \Bitrix\Main\Engine\Controller as BxController;
 use \Bitrix\Main\Application;
 use \Bitrix\Main\Error;
 use \Bitrix\Main\Context;
@@ -14,7 +14,7 @@ use \Ewp\Api\Pagination;
 
 Loc::loadMessages(__DIR__);
 
-class BaseController extends Controller
+class BaseController extends BxController
 {
   /*
   protected function processBeforeAction(Action $action)
